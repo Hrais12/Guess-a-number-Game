@@ -1,6 +1,23 @@
 const random= Math.floor(Math.random()*100)+1;
 let attempts = 0;
+let timerSeconds = 30; // Adjust as needed
+let timerInterval;
 
+const startTimer = () => {
+    timerInterval = setInterval(() => {
+        timerSeconds--;
+        document.getElementById("timer").textContent = `Time left: ${timerSeconds} seconds`;
+        if (timerSeconds === 0) {
+            clearInterval(timerInterval);
+            document.getElementById("result").textContent = `Time's up! You lose.`;
+            disableInput();
+        }
+    }, 1000);
+};
+function startGame() {
+    startTimer();
+    // Additional logic for starting the game if needed
+}
 
 const userInput = () =>{
 
@@ -41,4 +58,8 @@ function resetGame() {
     document.getElementById('userGuess').disabled = false;
     random = Math.floor(Math.random() * 100) + 1;
     attempts = 0;
+    timerSeconds = 30; // Reset timer
+    document.getElementById("timer").textContent = `Time left: ${timerSeconds} seconds`;
+    clearInterval(timerInterval); // Reset timer
+    startTimer(); // Restart timer
 }
