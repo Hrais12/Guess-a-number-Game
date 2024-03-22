@@ -2,6 +2,8 @@ const random= Math.floor(Math.random()*100)+1;
 let attempts = 0;
 let timerSeconds = 30; // Adjust as needed
 let timerInterval;
+document.getElementById('userGuess').disabled = true;
+
 
 const startTimer = () => {
     timerInterval = setInterval(() => {
@@ -16,6 +18,7 @@ const startTimer = () => {
 };
 function startGame() {
     startTimer();
+    document.getElementById('userGuess').disabled = false;
     // Additional logic for starting the game if needed
 }
 
@@ -34,7 +37,10 @@ const userInput = () =>{
 } else {
     attempts++; // Increment attempts counter here
     if (guess === random) {
+
+        clearInterval(timerInterval);
         result.textContent = `You win! It took you ${attempts} attempts.`;
+       
         disableInput();
     } else if (guess < random) {
         result.textContent = `Too low, try again`;
@@ -52,14 +58,17 @@ function disableInput() {
 }
 
 
+
 function resetGame() {
     document.getElementById('userGuess').value = '';
     document.getElementById('result').textContent = '';
-    document.getElementById('userGuess').disabled = false;
-    random = Math.floor(Math.random() * 100) + 1;
+    document.getElementById('userGuess').disabled = true;
+    const random= Math.floor(Math.random()*100)+1;
     attempts = 0;
     timerSeconds = 30; // Reset timer
     document.getElementById("timer").textContent = `Time left: ${timerSeconds} seconds`;
     clearInterval(timerInterval); // Reset timer
+    
     startTimer(); // Restart timer
+    
 }
