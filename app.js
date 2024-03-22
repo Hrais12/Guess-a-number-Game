@@ -69,6 +69,6 @@ function resetGame() {
     document.getElementById("timer").textContent = `Time left: ${timerSeconds} seconds`;
     clearInterval(timerInterval); // Reset timer
     
-    startTimer(); // Restart timer
+    
     
 }
